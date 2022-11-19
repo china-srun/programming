@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Vue Project</title>
+    <style>
+        .box {
+            background-color: purple;
+            height: 200px;
+            width: 200px;
+        }
+
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+<body>
+    <!-- what v-cloak does is that, whenever we restart the web, we won't see the original code before redereing -->
+    <div id="app" v-cloak>
+        {{greeting}}
+        <!-- v-model is the same as ng-Model in angular. It binds the data to a variable -->
+        <!-- to put keyboard event -->
+        <input @keyup.enter="greet" v-model="greeting" />
+
+        <hr />
+        <!-- v-on is when the user click, the same as onClick in angular-->
+        <button @onClick></button>
+        <!-- these two are the same, @click = v-on:click -->
+        <button v-on:click="isVisible = !isVisible">Show Box</button>
+        <!-- remember that just to call the function, we do not need to put (), however if we want to pass our arguments then we need ()-->
+        <button @click="toggleBox">  Show another box</button>
+
+        <div v-if="isVisible" class="box">
+
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        let app = Vue.createApp({
+            // data is the place where we put our variable
+            data: function() {
+                return {
+                    // greeting here is a vairable
+                    greeting: 'Hello Vue3!',
+                    isVisible: false,
+                }
+            },
+            // methods is the place where we put our methods or functions
+            methods: {
+                toggleBox() {
+                    this.isVisible = !this.isVisible
+                },
+                greet() {
+                    console.log(this.greeting)
+                }
+            },
+        })
+        app.mount('#app')
+    </script>
+</body>
+</html>
